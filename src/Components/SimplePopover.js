@@ -3,8 +3,15 @@ import React, { useState } from "react";
 import { Button, Popover, PopoverHeader, PopoverBody } from "reactstrap";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+import RangeSlider from "../Components/Homepage/RangeSlider";
+import Slider from "@material-ui/core/Slider";
 
 const useStyles = makeStyles({
+  root: {
+    width: 350,
+    marginTop: 20,
+    padding: "2rem",
+  },
   popoverContainer: {
     display: "flex",
     flexDirection: "row",
@@ -25,11 +32,30 @@ const useStyles = makeStyles({
     marginLeft: "6rem",
   },
   PopoverMain: {
-    padding: "4rem",
+    padding: "1.5rem",
     marginTop: "2rem",
     boxShadow: "0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)",
   },
 });
+
+function valuetext(value) {
+  return `${value}`;
+}
+
+const marks = [
+  {
+    value: 0,
+    label: "0 Tl",
+  },
+  {
+    value: 125,
+    label: "125 Tl",
+  },
+  {
+    value: 250,
+    label: "250 Tl",
+  },
+];
 
 const Example = (props) => {
   const classes = useStyles();
@@ -70,8 +96,19 @@ const Example = (props) => {
           toggle={toggle}
         >
           <Card className={classes.PopoverMain}>
-            <PopoverHeader>asd</PopoverHeader>
-            <PopoverBody>{props.content}</PopoverBody>
+            <PopoverBody>
+              <div className={classes.root}>
+                <Slider
+                  defaultValue={50}
+                  getAriaValueText={valuetext}
+                  aria-labelledby="discrete-slider-custom"
+                  step={1}
+                  valueLabelDisplay="auto"
+                  marks={marks}
+                  max={250}
+                />
+              </div>
+            </PopoverBody>
           </Card>
         </Popover>
       </div>
@@ -89,8 +126,19 @@ const Example = (props) => {
           toggle={toggle2}
         >
           <Card className={classes.PopoverMain}>
-            <PopoverHeader>asdee</PopoverHeader>
-            <PopoverBody>{props.content}</PopoverBody>
+            <PopoverBody>
+              <div className={classes.root}>
+                <Slider
+                  defaultValue={50}
+                  getAriaValueText={valuetext}
+                  aria-labelledby="discrete-slider-custom"
+                  step={1}
+                  valueLabelDisplay="auto"
+                  marks={marks}
+                  max={250}
+                />
+              </div>
+            </PopoverBody>
           </Card>
         </Popover>
       </div>
@@ -108,8 +156,19 @@ const Example = (props) => {
           toggle={toggle3}
         >
           <Card className={classes.PopoverMain}>
-            <PopoverHeader>asdkee</PopoverHeader>
-            <PopoverBody>{props.content}</PopoverBody>
+            <PopoverBody>
+              <div className={classes.root}>
+                <Slider
+                  defaultValue={50}
+                  getAriaValueText={valuetext}
+                  aria-labelledby="discrete-slider-custom"
+                  step={1}
+                  valueLabelDisplay="auto"
+                  marks={marks}
+                  max={250}
+                />
+              </div>
+            </PopoverBody>
           </Card>
         </Popover>
       </div>
