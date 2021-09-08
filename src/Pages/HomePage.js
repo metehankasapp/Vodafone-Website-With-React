@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Wrapper from "../Components/Wrapper";
 import Timeline from "../Components/Homepage/Timeline";
 import Count from "../Components/Homepage/Count";
+import RangeSlider from "../Components/Homepage/RangeSlider";
+import FilterContainer from "../Components/Homepage/FilterContainer";
 
 /*CSS*/
 import "../assets/App.css";
@@ -15,6 +17,9 @@ const HomePage = () => {
       <div>
         <Timeline />
         <Count />
+        <div className="middleWrapper">
+          <FilterContainer />
+        </div>
       </div>
     </Wrapper>
   );

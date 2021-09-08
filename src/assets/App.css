@@ -17,6 +17,10 @@ ul{
     list-style: none;
 }
 
+.middleWrapper{
+    padding: 8rem 16rem;
+}
+
 
 @font-face {
     font-family: VodafoneFont;

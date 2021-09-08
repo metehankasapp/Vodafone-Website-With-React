@@ -1,6 +1,31 @@
 import React, { useEffect, useState } from "react";
+import Box from "@material-ui/core/Box";
+/* Styles */
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  clockTime: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    margin: "2rem",
+  },
+  fspanClock: {
+    fontSize: "56px",
+    fontFamily: "VodafoneFont, sans-serif",
+    color: "#fff",
+  },
+  sspanClock: {
+    fontSize: "28px",
+    fontFamily: "VodafoneFont, sans-serif",
+    color: "#fff",
+  },
+});
 
 const Clock = ({ deadline }) => {
+  const classes = useStyles();
+
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -12,7 +37,6 @@ const Clock = ({ deadline }) => {
 
   const getTimeUntil = (deadline) => {
     const time = Date.parse(deadline) - Date.parse(new Date());
-    console.log(time);
     if (time < 0) {
       setDays(0);
       setHours(0);
@@ -33,12 +57,26 @@ const Clock = ({ deadline }) => {
   }, [deadline]);
 
   return (
-    <div>
-      <div className="Clock-days">{leading0(days)} Days</div>
-      <div className="Clock-hours">{leading0(hours)} Hours</div>
-      <div className="Clock-minutes">{leading0(minutes)} Minutes</div>
-      <div className="Clock-seconds">{leading0(seconds)} Seconds</div>
-    </div>
+    <Box
+      sx={{ display: "flex", justifyContent: "center", flexDirection: "row" }}
+    >
+      <div className={classes.clockTime}>
+        <span className={classes.fspanClock}>{leading0(days)}</span>
+        <span className={classes.sspanClock}>gün</span>
+      </div>
+      <div className={classes.clockTime}>
+        <span className={classes.fspanClock}>{leading0(hours)}</span>
+        <span className={classes.sspanClock}>saat</span>
+      </div>
+      <div className={classes.clockTime}>
+        <span className={classes.fspanClock}>{leading0(minutes)}</span>{" "}
+        <span className={classes.sspanClock}>dakika</span>
+      </div>
+      <div className={classes.clockTime}>
+        <span className={classes.fspanClock}>{leading0(seconds)}</span>{" "}
+        <span className={classes.sspanClock}>saniye</span>
+      </div>
+    </Box>
   );
 };
 

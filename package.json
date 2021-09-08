@@ -16,10 +16,12 @@
     "react-dom": "^17.0.2",
     "react-moment-countdown": "^0.4.2",
     "react-moment-proptypes": "^1.8.1",
+    "react-range": "^1.8.11",
     "react-router": "^5.2.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-sx": "^1.0.2",
+    "reactstrap": "^8.10.0",
     "theme-ui": "^0.11.1",
     "web-vitals": "^1.1.2"
   },
