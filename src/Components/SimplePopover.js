@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
     padding: ".8rem 1.5rem",
     fontSize: "16px",
-    marginLeft: ".8rem",
+    marginLeft: "15px",
     backgroundColor: "#fff",
   },
   filterSrc: {
@@ -37,10 +37,6 @@ const useStyles = makeStyles({
     boxShadow: "0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)",
   },
 });
-
-function valuetext(value) {
-  return `${value}`;
-}
 
 const marks = [
   {
@@ -59,10 +55,36 @@ const marks = [
 
 const Example = (props) => {
   const classes = useStyles();
+  const [value, setValue] = React.useState(50);
+  const [valueSecond, setValueSecond] = React.useState(50);
+  const [valueThird, setValueThird] = React.useState(50);
+
+  const popoverPrices = {
+    firstPrice: value,
+    secondNet: valueSecond,
+    thirdMinute: valueThird,
+  };
 
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [popoverOpen2, setPopoverOpen2] = useState(false);
   const [popoverOpen3, setPopoverOpen3] = useState(false);
+
+  
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    popoverPrices.firstPrice = newValue;
+    console.log(popoverPrices);
+  };
+  const handleChangeSecond = (event, newValue) => {
+    setValueSecond(newValue);
+    popoverPrices.secondNet = newValue;
+    console.log(popoverPrices);
+  };
+  const handleChangeThird = (event, newValue) => {
+    setValueThird(newValue);
+    popoverPrices.thirdMinute = newValue;
+    console.log(popoverPrices);
+  };
 
   const toggle = () => {
     setPopoverOpen(!popoverOpen);
@@ -99,8 +121,9 @@ const Example = (props) => {
             <PopoverBody>
               <div className={classes.root}>
                 <Slider
+                  value={value}
                   defaultValue={50}
-                  getAriaValueText={valuetext}
+                  onChange={handleChange}
                   aria-labelledby="discrete-slider-custom"
                   step={1}
                   valueLabelDisplay="auto"
@@ -129,8 +152,9 @@ const Example = (props) => {
             <PopoverBody>
               <div className={classes.root}>
                 <Slider
+                  value={valueSecond}
                   defaultValue={50}
-                  getAriaValueText={valuetext}
+                  onChange={handleChangeSecond}
                   aria-labelledby="discrete-slider-custom"
                   step={1}
                   valueLabelDisplay="auto"
@@ -159,8 +183,9 @@ const Example = (props) => {
             <PopoverBody>
               <div className={classes.root}>
                 <Slider
+                  value={valueThird}
                   defaultValue={50}
-                  getAriaValueText={valuetext}
+                  onChange={handleChangeThird}
                   aria-labelledby="discrete-slider-custom"
                   step={1}
                   valueLabelDisplay="auto"

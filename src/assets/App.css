@@ -1,24 +1,25 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 
-html{
+html {
     font-size: 10px;
 }
 
-body{
+body {
     font-size: 1.6rem;
 }
 
-ul{
+ul {
     list-style: none;
 }
 
-.middleWrapper{
-    padding: 8rem 16rem;
+.middleWrapper {
+    padding: 4rem 16rem;
+    background-color: #F4F4F4;
 }
 
 
@@ -26,4 +27,3 @@ ul{
     font-family: VodafoneFont;
     src: url(/src/assets/Vodafone.ttf);
 }
-  
