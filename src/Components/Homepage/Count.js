@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 const Count = () => {
   const classes = useStyles();
 
-  let deadline = "september,13, 2021";
+  let deadline = "october,25, 2021";
 
   return (
     <div className={classes.bgContainer}>

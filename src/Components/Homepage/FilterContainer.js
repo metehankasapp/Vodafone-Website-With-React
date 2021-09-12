@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, Component } from "react";
 import Wrapper from "../../Components/Wrapper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -7,8 +7,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import SimplePopover from "../SimplePopover";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
+import { SocialIcon } from "react-social-icons";
 
 const useStyles = makeStyles((theme) => ({
+  socialIcon: {
+    width: "25px !important",
+    height: "25px !important",
+    marginLeft: "3px",
+  },
   filterTitle: {
     fontSize: "16px",
     fontFamily: "VodafoneFont, Sans-serif",
@@ -52,12 +58,22 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     overflow: "visible",
   },
+  packagesCardDetailsCt: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#333",
+    zIndex: "5",
+    padding: "0 10px",
+    transition: "all .5s ease",
+  },
   packagesAbsoluteTop: {
     position: "absolute",
     top: "-10px",
     right: "-10px",
     display: "flex",
     flexDirection: "row",
+    zIndex: "6",
   },
   packagesAbsSinirsiz: {
     backgroundColor: "rgb(235, 151, 0)",
@@ -66,6 +82,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "VodafoneFont, sans-serif",
     fontSize: "12px",
     padding: "0 2px",
+    zIndex: "6",
   },
   packagesAbsOnlineOzel: {
     backgroundColor: "red",
@@ -85,24 +102,32 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "300",
     fontFamily: "VodafoneFont, sans-serif",
     backgroundColor: "rgba(0,0,0,.2)",
-    padding: "6px",
+    padding: "10px",
+  },
+  packageNamef: {
+    color: "white",
+    fontSize: "16px",
+    fontWeight: "300",
+    fontFamily: "VodafoneFont, sans-serif",
+    padding: "10px",
+    borderBottom: "1px solid rgba(255,255,255,.3)",
   },
   fsArea: {
     padding: "15px",
     paddingBottom: "30px",
     color: "#fff",
-    position:"relative"
+    position: "relative",
   },
-  fsAbs:{
-    position:"absolute",
-    bottom:"-10px",
-    left:"50%",
-    transform:"translateX(-50%)",
-    backgroundColor:"rgb(89, 13, 211)",
-    width:"65%",
-    borderRadius:"25px",
+  fsAbs: {
+    position: "absolute",
+    bottom: "-10px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    backgroundColor: "rgb(89, 13, 211)",
+    width: "65%",
+    borderRadius: "25px",
     fontFamily: "VodafoneFont, sans-serif",
-    fontSize:"13px"
+    fontSize: "13px",
   },
   basicSubtitle: {
     fontSize: "13px",
@@ -157,6 +182,43 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#fff",
     },
   },
+  detayButtonf: {
+    borderRadius: "20px",
+    border: "1px solid #fff",
+    color: "#fff",
+    margin: "15px",
+    fontFamily: "VodafoneFont, sans-serif",
+    fontSize: "13px",
+    padding: "2px 25px",
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+  detailSentenceContainer: {
+    padding: "15px 0",
+    borderBottom: "1px solid rgba(255,255,255,.3)",
+  },
+  detailSentence: {
+    fontSize: "12px",
+    fontFamily: "VodafoneFont, sans-serif",
+    color: "#fff",
+    fontWeight: "500",
+    marginBottom: "5px",
+  },
+  detailsUl: {
+    height: "250px",
+    overflow: "scroll",
+    listStyleType: "disc",
+    padding: "15px 0",
+    margin: "0",
+    "&>li": {
+      color: "#fff",
+      marginLeft: "15px",
+      fontSize: "12px",
+      fontFamily: "VodafoneFont, sans-serif",
+      marginBottom: "10px",
+    },
+  },
 }));
 
 const Tags = [
@@ -170,6 +232,11 @@ const Tags = [
 
 const FilterContainer = () => {
   const classes = useStyles();
+  const [showDetail, setShowDetail] = useState({});
+
+  const toggleHide = (index) => {
+    setShowDetail({ ...showDetail, [index]: !showDetail[index] });
+  };
 
   return (
     <Wrapper>
@@ -232,9 +299,61 @@ const FilterContainer = () => {
       <Grid container className={classes.packagesContainer}>
         {PackagesList.filter(
           (packageName) => packageName.priceThreeMonth > 54
-        ).map((filteredPackage) => (
+        ).map((filteredPackage, index) => (
           <Grid key={filteredPackage.key} className={classes.packagesCard}>
             <Card className={classes.packagesCardInner}>
+              <Box
+                className={classes.packagesCardDetailsCt}
+                sx={{
+                  opacity: !!showDetail[index] && "1",
+                  visibility: !!showDetail[index] && "visible",
+                  opacity: !showDetail[index] && "0",
+
+                }}
+              >
+                <Box>
+                  <Typography
+                    variant="subtitle1"
+                    align="center"
+                    className={classes.packageNamef}
+                  >
+                    {filteredPackage.packageName}
+                  </Typography>
+                </Box>
+                <Box className={classes.detailSentenceContainer}>
+                  <Typography
+                    variant="subtitle1"
+                    align="center"
+                    className={classes.detailSentence}
+                  >
+                    Sınırsız GB'larını aşağıdaki uygulamalar için özgürce
+                    kullanabilirsin:
+                  </Typography>
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    {filteredPackage.packageFree.map((val) => (
+                      <SocialIcon
+                        url={`https://${val}.com/metehankasap`}
+                        className={classes.socialIcon}
+                      />
+                    ))}
+                  </Box>
+                </Box>
+                <Box>
+                  <ul className={classes.detailsUl}>
+                    {filteredPackage.showDetails.map((key, val) => (
+                      <li key={val}>{key}</li>
+                    ))}
+                  </ul>
+                </Box>
+                <Box fullWidth sx={{ textAlign: "center" }}>
+                  <Button
+                    className={classes.detayButtonf}
+                    onClick={(e) => toggleHide(index)}
+                  >
+                    Detayları Gizle
+                  </Button>
+                </Box>
+              </Box>
               <Box className={classes.packagesAbsoluteTop}>
                 {filteredPackage.OnlineOzel ? (
                   <Typography
@@ -244,21 +363,16 @@ const FilterContainer = () => {
                   >
                     Online'a Özel İndirimli
                   </Typography>
-                ) : (
-                  null
-                )}
+                ) : null}
                 {filteredPackage.Sinirsiz ? (
                   <Typography
-                  variant="subtitle1"
-                  align="center"
-                  className={classes.packagesAbsSinirsiz}
-                >
-                  Sinirsiz
-                </Typography>
-                ) : (
-                  null
-                )}
-                
+                    variant="subtitle1"
+                    align="center"
+                    className={classes.packagesAbsSinirsiz}
+                  >
+                    Sinirsiz
+                  </Typography>
+                ) : null}
               </Box>
               <Box className={classes.PackageFirstAreaContainer}>
                 <Box>
@@ -271,17 +385,15 @@ const FilterContainer = () => {
                   </Typography>
                 </Box>
                 <Box className={classes.fsArea}>
-                {filteredPackage.specialOffer ? (
-                  <Typography
-                  variant="subtitle1"
-                  align="center"
-                  className={classes.fsAbs}
-                >
-                  {filteredPackage.specialOffer}
-                </Typography>
-                ) : (
-                  null
-                )}
+                  {filteredPackage.specialOffer ? (
+                    <Typography
+                      variant="subtitle1"
+                      align="center"
+                      className={classes.fsAbs}
+                    >
+                      {filteredPackage.specialOffer}
+                    </Typography>
+                  ) : null}
                   <Typography
                     variant="subtitle1"
                     align="center"
@@ -336,6 +448,30 @@ const FilterContainer = () => {
                     + SINIRSIZ
                   </Typography>
                 </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "inline-flex",
+                      justifyContent: "center",
+                      padding: "10px 20px",
+                      border: "1px solid #ddd",
+                      borderRadius: "25px",
+                    }}
+                  >
+                    {filteredPackage.packageFree.map((val) => (
+                      <SocialIcon
+                        url={`https://${val}.com/metehankasap`}
+                        className={classes.socialIcon}
+                      />
+                    ))}
+                  </Box>
+                </Box>
+
                 <Typography
                   variant="subtitle1"
                   align="center"
@@ -352,7 +488,10 @@ const FilterContainer = () => {
                 </Typography>
 
                 <Box fullWidth sx={{ textAlign: "center" }}>
-                  <Button className={classes.detayButton}>
+                  <Button
+                    className={classes.detayButton}
+                    onClick={(e) => toggleHide(index)}
+                  >
                     Detayları Göster
                   </Button>
                 </Box>
@@ -374,10 +513,18 @@ const PackagesList = [
     OnlineOzel: true,
     Sinirsiz: true,
     priceThreeMonth: 55,
-    specialOffer:"Sınırsız TikTok paketi 25TL yerine 15TL!",
+    specialOffer: "Sınırsız TikTok paketi 25TL yerine 15TL!",
     priceNineMonth: 64,
+    tags: [
+      "26 Yaş Altına Özel",
+      "Öne Çıkan",
+      "Ekonomik",
+      "Sana Özel",
+      "Çok Satan",
+      "Sınırsız",
+    ],
     packageDetail: "20 GB",
-    packageFree: ["Whatsapp", "Messenger"],
+    packageFree: ["whatsapp", "facebook", "twitter", "spotify", "instagram"],
     packageDescription: "ilk ay 20 GB hediye!",
     packageDetailSecond: "1000 DK + 250 SMS",
     showDetails: [
@@ -396,12 +543,12 @@ const PackagesList = [
     Sinirsiz: false,
     priceThreeMonth: 55,
     priceNineMonth: 64,
+    tags: ["26 Yaş Altına Özel", "Öne Çıkan"],
     packageDetail: "20 GB",
-    packageFree: ["Whatsapp", "Messenger"],
+    packageFree: ["whatsapp", "facebook", "spotify", "instagram"],
     packageDescription: "ilk ay 20 GB hediye!",
     packageDetailSecond: "1000 DK + 250 SMS",
     showDetails: [
-      "Vodafonelular ve sabit hatlarla sınırsız konuşabilirsiniz.",
       "Yeni gelen Redlilere özel Sınırsız Tiktok paketi aylık 25TL yerine 15TL! Bu paket ile Tiktok uygulaması yönüne internet kullanımınız GB kotanızdan düşmez.",
       "Vodafone TV Red Paketi aylık 2GB interneti ile 12 ay boyunca hediye!",
       "Ücretsiz araç dezenfeksiyonundan Trendyol'da kargo indirimine kadar bir çok ayrıcalık Vodafone Yanımda'da!",
@@ -415,10 +562,11 @@ const PackagesList = [
     OnlineOzel: false,
     Sinirsiz: true,
     priceThreeMonth: 100,
-    specialOffer:"Sınırsız TikTok paketi 25TL yerine 15TL!",
+    specialOffer: "Sınırsız TikTok paketi 25TL yerine 15TL!",
     priceNineMonth: 64,
+    tags: ["Sana Özel", "Çok Satan", "Sınırsız"],
     packageDetail: "20 GB",
-    packageFree: ["whatsapp", "messenger"],
+    packageFree: ["whatsapp", "instagram"],
     packageDescription: "ilk ay 20 GB hediye!",
     packageDetailSecond: "1000 DK + 250 SMS",
     showDetails: [
