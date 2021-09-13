@@ -2,6 +2,7 @@ import React, { useState, Component } from "react";
 import Wrapper from "../../Components/Wrapper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import BottomTabs from "../Homepage/BottomTabs";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import SimplePopover from "../SimplePopover";
@@ -296,6 +297,7 @@ const FilterContainer = () => {
           </Box>
         </Grid>
       </Grid>
+
       <Grid container className={classes.packagesContainer}>
         {PackagesList.filter(
           (packageName) => packageName.priceThreeMonth > 54
@@ -308,7 +310,6 @@ const FilterContainer = () => {
                   opacity: !!showDetail[index] && "1",
                   visibility: !!showDetail[index] && "visible",
                   opacity: !showDetail[index] && "0",
-
                 }}
               >
                 <Box>
@@ -499,6 +500,12 @@ const FilterContainer = () => {
             </Card>
           </Grid>
         ))}
+      </Grid>
+      <Grid container>
+        <Typography variant="h2" align="center">
+          Sorularınızın cevapları burada.
+        </Typography>
+        <BottomTabs />
       </Grid>
     </Wrapper>
   );

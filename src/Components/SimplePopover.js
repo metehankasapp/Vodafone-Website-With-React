@@ -36,6 +36,9 @@ const useStyles = makeStyles({
     marginTop: "2rem",
     boxShadow: "0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)",
   },
+  zIndexed: {
+    zIndex: "7",
+  },
 });
 
 const marks = [
@@ -69,7 +72,6 @@ const Example = (props) => {
   const [popoverOpen2, setPopoverOpen2] = useState(false);
   const [popoverOpen3, setPopoverOpen3] = useState(false);
 
-  
   const handleChange = (event, newValue) => {
     setValue(newValue);
     popoverPrices.firstPrice = newValue;
@@ -118,7 +120,7 @@ const Example = (props) => {
           toggle={toggle}
         >
           <Card className={classes.PopoverMain}>
-            <PopoverBody>
+            <PopoverBody >
               <div className={classes.root}>
                 <Slider
                   value={value}
