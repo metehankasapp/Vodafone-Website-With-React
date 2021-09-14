@@ -8,6 +8,8 @@ import RangeSlider from "../Components/Homepage/RangeSlider";
 import FilterContainer from "../Components/Homepage/FilterContainer";
 import Typography from "@material-ui/core/Typography";
 import VodafoneAdvantages from "../Components/VodafoneAdvantages";
+import VodafoneAccordion from "../Components/VodafoneAccordion";
+
 
 /*CSS*/
 import "../assets/App.css";
@@ -33,6 +35,9 @@ const HomePage = () => {
           </div>
           <div className="wrapperAdvantages">
               <VodafoneAdvantages />
+          </div>
+          <div>
+            <VodafoneAccordion />
           </div>
         </div>
       </Wrapper>
