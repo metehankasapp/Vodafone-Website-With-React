@@ -11,6 +11,11 @@ import Card from "@material-ui/core/Card";
 import { SocialIcon } from "react-social-icons";
 
 const useStyles = makeStyles((theme) => ({
+  tabsCtr:{
+    display:"flex",
+    justifyContent:"center",
+    flexDirection:"column"
+  },
   socialIcon: {
     width: "25px !important",
     height: "25px !important",
@@ -220,6 +225,11 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: "10px",
     },
   },
+  QuestionAns:{
+    fontFamily:"VodafoneFont,sans-serif",
+    color:"#333",
+    fontWeight:"100"
+  }
 }));
 
 const Tags = [
@@ -501,8 +511,8 @@ const FilterContainer = () => {
           </Grid>
         ))}
       </Grid>
-      <Grid container>
-        <Typography variant="h2" align="center">
+      <Grid container className={classes.tabsCtr}>
+        <Typography variant="h2" align="center" className={classes.QuestionAns}>
           Sorularınızın cevapları burada.
         </Typography>
         <BottomTabs />

@@ -29,6 +29,37 @@ ul {
     z-index: 10;
 }
 
+
+.MuiTabs-flexContainer {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.MuiTab-root {
+    border: 1px solid #999 !important;
+    border-radius: 8px !important;
+    background-color: #fff !important;
+    width: 200px;
+    box-sizing: border-box;
+    height: 110px;
+}
+
+.MuiTab-wrapper {
+    font-size: 11px;
+    font-family: "VodafoneFont", sans-serif;
+}
+
+.MuiTab-root:focus {
+    border: 2px solid #007c92 !important;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    ;
+}
+
+.MuiTabs-indicator {
+    display: none;
+}
+
 @font-face {
     font-family: VodafoneFont;
     src: url(/src/assets/Vodafone.ttf);
