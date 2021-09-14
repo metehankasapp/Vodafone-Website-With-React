@@ -10,8 +10,30 @@ const useStyles = makeStyles((theme) => ({
     margin: "5rem 0",
     color: "#333",
   },
-  tabInner:{
-      marginBottom:"3rem"
+  tabInner: {
+    marginBottom: "3rem",
+  },
+  tabCtr: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    padding: "4rem",
+  },
+  tabsInnerTitle: {
+    fontSize: "18px",
+    fontFamily: "VodafoneFont,sans-serif",
+    fontWeight: "700",
+    color: "#000",
+    marginBottom: "1rem",
+  },
+  tabsInnerContent: {
+    fontSize: "16px",
+    fontFamily: "VodafoneFont,sans-serif",
+    fontWeight: "100",
+    color: "#333",
+  },
+  flex:{
+      display:"flex"
   }
 }));
 
@@ -24,22 +46,46 @@ const VodafoneTab = (props) => {
         {props.label}
       </Typography>
       <Grid container>
-        <Grid item xs={12} lg={6}>
-          <Box>
+        <Grid item xs={12} lg={6} className={classes.flex}>
+          <Box className={classes.tabCtr}>
             {props.object.firstArea.map((item) => (
               <Box key={item.key} className={classes.tabInner}>
-                <Typography variant="h6" align="left">{item.title}</Typography>
-                <Typography variant="subtitle" align="center">{item.text}</Typography>
+                <Typography
+                  variant="h6"
+                  align="left"
+                  className={classes.tabsInnerTitle}
+                >
+                  {item.title}
+                </Typography>
+                <Typography
+                  variant="subtitle"
+                  align="center"
+                  className={classes.tabsInnerContent}
+                >
+                  {item.text}
+                </Typography>
               </Box>
             ))}
           </Box>
         </Grid>
-        <Grid item xs={12} lg={6}>
-        <Box>
+        <Grid item xs={12} lg={6} className={classes.flex}>
+          <Box className={classes.tabCtr}>
             {props.object.secondArea.map((item) => (
               <Box key={item.key} className={classes.tabInner}>
-                <Typography variant="h6" align="left">{item.title}</Typography>
-                <Typography variant="subtitle" align="center">{item.text}</Typography>
+                <Typography
+                  variant="h6"
+                  align="left"
+                  className={classes.tabsInnerTitle}
+                >
+                  {item.title}
+                </Typography>
+                <Typography
+                  variant="subtitle"
+                  align="center"
+                  className={classes.tabsInnerContent}
+                >
+                  {item.text}
+                </Typography>
               </Box>
             ))}
           </Box>
