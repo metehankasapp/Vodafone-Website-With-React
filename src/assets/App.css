@@ -30,6 +30,12 @@ ul {
 }
 
 
+.wrapperAdvantages {
+    padding: 2rem 4rem;
+    background-color: #333;
+    color: #fff;
+}
+
 .MuiTabs-flexContainer {
     margin-top: 5rem;
     display: flex;
@@ -69,5 +75,11 @@ ul {
     .middleWrapper {
         padding: 4rem 16rem;
         background-color: #F4F4F4;
+    }
+
+    .wrapperAdvantages {
+        padding: 4rem 16rem;
+        background-color: #333;
+        color: #fff;
     }
 }
